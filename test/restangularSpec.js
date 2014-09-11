@@ -557,6 +557,20 @@ describe("Restangular", function() {
 
       $httpBackend.flush();
     });
+
+    it("putElement() should pass a restangularCollection to the callback", function() {
+      $httpBackend.expectGET('/accounts');
+      restangularAccounts.getList().then(function(accounts) {
+        expect(accounts.restangularCollection).toBe(true);
+        accounts[1].amount += 1;
+        $httpBackend.expectPUT('/accounts/1');
+        accounts.putElement(1).then(function(newAccounts) {
+          expect(newAccounts.restangularCollection).toBe(true);
+          expect(newAccounts.putElement).toBeDefined();
+        });
+      });
+      $httpBackend.flush();
+    })
   });
 
   describe("Scoped Service", function() {
