@@ -567,6 +567,8 @@ describe("Restangular", function() {
         accounts.putElement(1).then(function(newAccounts) {
           expect(newAccounts.restangularCollection).toBe(true);
           expect(newAccounts.putElement).toBeDefined();
+          expect(newAccounts[0].restangularCollection).toBe(false);
+          expect(newAccounts[1].restangularCollection).toBe(false);
         });
       });
       $httpBackend.flush();

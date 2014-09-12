@@ -932,7 +932,7 @@ module.provider('Restangular', function() {
 
       function copyRestangularizedElement(fromElement, toElement) {
         var copiedElement = angular.copy(fromElement, toElement);
-        if (fromElement.restangularCollection === true) {
+        if (fromElement.restangularCollection != null && fromElement.restangularCollection === true) {
           return restangularizeCollection(copiedElement[config.restangularFields.parentResource],
                   copiedElement, copiedElement[config.restangularFields.route], true);
         } else {
